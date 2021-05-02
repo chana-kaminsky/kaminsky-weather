@@ -10,26 +10,40 @@ import static org.junit.Assert.*;
 
 public class OpenWeatherMapServiceTest
 {
+    OpenWeatherMapServiceFactory factory = new OpenWeatherMapServiceFactory();
+
     @Test
     public void getCurrentWeather()
     {
         // given
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.openweathermap.org")
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-                .build();
-
-        OpenWeatherMapService service = retrofit.create(OpenWeatherMapService.class);
+        OpenWeatherMapService service = factory.newInstance();
 
         // when
-        Single<OpenWeatherMapFeed> single = service.getCurrentWeather("Pittsburgh");
-
-        OpenWeatherMapFeed feed = single.blockingGet();
+        OpenWeatherMapFeed feed = service.getCurrentWeather("Pittsburgh", "imperial").blockingGet();
 
         // then
         assertNotNull(feed);
         assertNotNull(feed.main);
-        assertTrue(feed.main.temp > 0); // because it's in Kelvin
+        assertTrue(feed.main.temp > 0);
+        assertTrue(feed.main.temp < 150);
+        assertTrue(feed.dt > 0);
+        assertEquals("Pittsburgh", feed.name);
+    }
+
+    @Test
+    public void getWeatherForecast()
+    {
+        // given
+        OpenWeatherMapService service = factory.newInstance();
+
+        // when
+        OpenWeatherMapForecast forecast = service.getWeatherForecast("Pittsburgh", "imperial").blockingGet();
+
+        // then
+        assertNotNull(forecast);
+        assertNotNull(forecast.list);
+        assertFalse(forecast.list.isEmpty());
+        assertTrue(forecast.list.get(0).dt > 0);
+        assertNotNull(forecast.list.get(0).weather);
     }
 }

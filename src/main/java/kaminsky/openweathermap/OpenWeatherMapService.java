@@ -7,5 +7,14 @@ import retrofit2.http.Query;
 public interface OpenWeatherMapService
 {
     @GET("/data/2.5/weather?APPID=93016f15c0b2aa6077a9d6f512c86958")
-    Single<OpenWeatherMapFeed> getCurrentWeather(@Query("q") String location);
+    Single<OpenWeatherMapFeed> getCurrentWeather(
+            @Query("q") String location,
+            @Query("units") String units
+    );
+
+    @GET("/data/2.5/forecast?APPID=93016f15c0b2aa6077a9d6f512c86958")
+    Single<OpenWeatherMapForecast> getWeatherForecast(
+            @Query("q") String location,
+            @Query("units") String units
+    );
 }
