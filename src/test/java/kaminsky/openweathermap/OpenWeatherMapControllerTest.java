@@ -10,7 +10,6 @@ import javafx.scene.image.ImageView;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +21,7 @@ public class OpenWeatherMapControllerTest
     private OpenWeatherMapController controller;
     private ComboBox<String> degrees;
     private Label errorLabel;
+    private TextField locationInput;
 
     @BeforeClass
     public static void beforeClass() {
@@ -62,13 +62,12 @@ public class OpenWeatherMapControllerTest
         controller.degrees = degrees;
         errorLabel = mock(Label.class);
         controller.errorLabel = errorLabel;
-
-        doReturn("Fahrenheit").when(degrees).getValue();
+        OpenWeatherMapService service = mock(OpenWeatherMapService.class);
+        controller.service = service;
+        TextField locationInput = mock(TextField.class);
+        controller.locationInput = locationInput;
         Disposable disposable = mock(Disposable.class);
-//        doReturn(disposable).when(service).getCurrentWeather("Pittsburgh", "Fahrenheit")
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(Schedulers.trampoline())
-//                .subscribe(this::onOpenWeatherMapFeedRun, this::onErrorRun);
+        doReturn("Fahrenheit").when(degrees).getValue();
 
         // when
         controller.getWeather();

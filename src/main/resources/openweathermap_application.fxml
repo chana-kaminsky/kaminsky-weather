@@ -14,7 +14,7 @@
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="kaminsky.openweathermap.OpenWeatherMapController"
           prefHeight="400.0" prefWidth="600.0"
-          hgap="10" vgap="20">
+          hgap="20" vgap="20">
 
     <padding>
         <Insets top="25" right="25" bottom="10" left="25"/>
@@ -26,7 +26,7 @@
         <font> <Font name="Verdana" size="15" />  </font>
     </Label>
 
-    <TextField fx:id="locationInput"
+    <TextField fx:id="locationInput" GridPane.columnSpan="2"
                GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
     <Button text="Get Weather" onAction="#getWeather" fx:id="button"
@@ -43,7 +43,7 @@
     <ImageView fx:id="currentIcon"
            GridPane.rowIndex="2" GridPane.columnIndex="2" />
 
-    <Label text="5 Day Forecast:"
+    <Label text="5 Day Forecast:" GridPane.columnSpan="2"
            GridPane.rowIndex="3" GridPane.columnIndex="0" >
         <font> <Font name="Verdana" size="15" />  </font>
     </Label>
@@ -51,11 +51,11 @@
     <Label fx:id="errorLabel"
            GridPane.rowIndex="1" GridPane.columnIndex="2" />
 
-    <Label fx:id="day1" GridPane.rowIndex="4" GridPane.columnIndex="0" />
-    <Label fx:id="day2" GridPane.rowIndex="4" GridPane.columnIndex="1" />
-    <Label fx:id="day3" GridPane.rowIndex="4" GridPane.columnIndex="2" />
-    <Label fx:id="day4" GridPane.rowIndex="4" GridPane.columnIndex="3" />
-    <Label fx:id="day5" GridPane.rowIndex="4" GridPane.columnIndex="4" />
+    <Label fx:id="day1" GridPane.rowIndex="4" GridPane.columnIndex="1" GridPane.columnSpan="2"/>
+    <Label fx:id="day2" GridPane.rowIndex="4" GridPane.columnIndex="2" />
+    <Label fx:id="day3" GridPane.rowIndex="4" GridPane.columnIndex="3" />
+    <Label fx:id="day4" GridPane.rowIndex="4" GridPane.columnIndex="4" />
+    <Label fx:id="day5" GridPane.rowIndex="4" GridPane.columnIndex="5" />
 
     <fx:define>
         <ArrayList fx:id="forecastList">
@@ -67,14 +67,14 @@
         </ArrayList>
     </fx:define>
 
-    <ImageView fx:id="image1" GridPane.rowIndex="5" GridPane.columnIndex="0" />
-    <ImageView fx:id="image2" GridPane.rowIndex="5" GridPane.columnIndex="1" />
-    <ImageView fx:id="image3" GridPane.rowIndex="5" GridPane.columnIndex="2" />
-    <ImageView fx:id="image4" GridPane.rowIndex="5" GridPane.columnIndex="3" />
-    <ImageView fx:id="image5" GridPane.rowIndex="5" GridPane.columnIndex="4" />
+    <ImageView fx:id="image1" GridPane.rowIndex="5" GridPane.columnIndex="1" GridPane.columnSpan="2"/>
+    <ImageView fx:id="image2" GridPane.rowIndex="5" GridPane.columnIndex="2" />
+    <ImageView fx:id="image3" GridPane.rowIndex="5" GridPane.columnIndex="3" />
+    <ImageView fx:id="image4" GridPane.rowIndex="5" GridPane.columnIndex="4" />
+    <ImageView fx:id="image5" GridPane.rowIndex="5" GridPane.columnIndex="5" />
 
     <fx:define>
-        <ArrayList fx:id="iconList">
+        <ArrayList fx:id="iconList" >
             <fx:reference source="image1"/>
             <fx:reference source="image2"/>
             <fx:reference source="image3"/>

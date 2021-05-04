@@ -17,7 +17,7 @@ public class OpenWeatherMapApplication extends Application
 
         Parent root = FXMLLoader.load(getClass().getResource("/openweathermap_application.fxml"));
         root.setStyle("-fx-background-color: WHITE;");
-        Scene scene = new Scene(root, 800, 500);
+        Scene scene = new Scene(root, 900, 500);
 
         stage.setTitle("Weather");
         stage.setScene(scene);
