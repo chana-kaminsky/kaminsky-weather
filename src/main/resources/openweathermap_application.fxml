@@ -26,7 +26,7 @@
         <font> <Font name="Verdana" size="15" />  </font>
     </Label>
 
-    <TextField fx:id="locationInput" text="Pittsburgh"
+    <TextField fx:id="locationInput"
                GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
     <Button text="Get Weather" onAction="#getWeather" fx:id="button"
