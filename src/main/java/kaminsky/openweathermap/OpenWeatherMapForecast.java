@@ -1,5 +1,6 @@
 package kaminsky.openweathermap;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class OpenWeatherMapForecast
 
             public String getIconUrl()
             {
-                return "http://openweathermap.org/ing/en" + icon + "@2x.png";
+                return "http://openweathermap.org/img/wn/" + icon + "@2x.png";
             }
         }
 
@@ -42,5 +43,26 @@ public class OpenWeatherMapForecast
                     weather.get(0).main + " " +
                     weather.get(0).getIconUrl();
         }
+    }
+
+    /**
+     * @param day the amount of days after today to retrieve the midday forecast for.
+     * @return the forecast matching 11 AM for the specified day or null if the day is out of range.
+     */
+    public HourlyForecast getForecastFor(int day) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, day);
+        calendar.set(Calendar.HOUR_OF_DAY, 11);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        Date elevenAM = calendar.getTime();
+        for (HourlyForecast forecast : list) {
+            if (forecast.dt * 1000 >= elevenAM.getTime()) {
+                return forecast;
+            }
+        }
+
+        return null;
     }
 }

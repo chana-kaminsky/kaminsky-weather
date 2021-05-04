@@ -46,4 +46,19 @@ public class OpenWeatherMapServiceTest
         assertTrue(forecast.list.get(0).dt > 0);
         assertNotNull(forecast.list.get(0).weather);
     }
+
+    @Test
+    public void getWeatherForecast_getForecastFor() {
+        // given
+        OpenWeatherMapService service = factory.newInstance();
+        OpenWeatherMapForecast forecast = service.getWeatherForecast("Pittsburgh", "imperial")
+                .blockingGet();
+
+        // when
+        OpenWeatherMapForecast.HourlyForecast hourlyForecast = forecast.getForecastFor(1);
+
+        // then
+        assertNotNull(hourlyForecast);
+        assertEquals(11, hourlyForecast.getDate().getHours());
+    }
 }

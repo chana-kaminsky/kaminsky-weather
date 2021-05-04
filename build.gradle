@@ -6,7 +6,7 @@ apply plugin: 'java'
 apply plugin: 'application'
 
 // This is the class with the main to run when the application starts.
-mainClassName = 'kaminsky.geojson.GeoJsonApplication'
+mainClassName = 'kaminsky.openweathermap.OpenWeatherMapApplication'
 
 repositories {
     mavenCentral()
