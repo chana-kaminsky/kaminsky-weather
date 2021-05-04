@@ -12,38 +12,46 @@ import javafx.scene.image.ImageView;
 
 import java.util.List;
 
+/**
+ * OpenWeatherMapController is a class that has
+ * methods called by openweathermap_application.fxml.
+ */
 public class OpenWeatherMapController
 {
     @FXML
     TextField locationInput;
-
     @FXML
     Label currentTemp;
-
     @FXML
     ImageView currentIcon;
-
     @FXML
     List<Label> forecastList;
-
     @FXML
     List<ImageView> iconList;
-
     @FXML
     ComboBox<String> degrees;
-
     @FXML
     Label errorLabel;
 
     OpenWeatherMapServiceFactory factory = new OpenWeatherMapServiceFactory();
     OpenWeatherMapService service;
 
+    /**
+     * Method called when the application is first started.
+     * Initializes an OpenWeatherMapService.
+     */
     public void initialize()
     {
         service = factory.newInstance();
         degrees.getSelectionModel().select(1);
     }
 
+    /**
+     * Method called when Get Weather button on application is clicked.
+     * Disposable requests data from the API with user input for
+     * location and units of temperature. It works with the feed
+     * and forecast as the data gets downloaded.
+     */
     public void getWeather()
     {
         errorLabel.setText("");
@@ -60,6 +68,11 @@ public class OpenWeatherMapController
                 .subscribe(this::onOpenWeatherMapForecast, this::onError);
     }
 
+    /**
+     * Gets the temperature and the icon for the current weather
+     * from the feed and displays them in the application.
+     * @param feed
+     */
     public void onOpenWeatherMapFeed(OpenWeatherMapFeed feed)
     {
         Platform.runLater(new Runnable(){
@@ -78,6 +91,12 @@ public class OpenWeatherMapController
         currentIcon.setImage(new Image(feed.weather.get(0).getIconUrl()));
     }
 
+    /**
+     * Gets the temperature and icons for the weather forecast
+     * for the next five days at 11AM from the forecast and
+     * displays them in the application.
+     * @param forecast
+     */
     public void onOpenWeatherMapForecast(OpenWeatherMapForecast forecast)
     {
 
@@ -103,6 +122,10 @@ public class OpenWeatherMapController
         }
     }
 
+    /**
+     * Method called when attempt to call API with invalid location.
+     * @param throwable
+     */
     public void onError(Throwable throwable)
     {
         Platform.runLater(new Runnable(){

@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
-
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.text.Font?>
 <?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import java.lang.String?>
+<?import java.util.ArrayList?>
 <GridPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="kaminsky.openweathermap.OpenWeatherMapController"
@@ -22,40 +20,40 @@
 
 
     <Label text="Enter a location:"
-           GridPane.rowIndex="0" GridPane.columnIndex="0" >
-        <font> <Font name="Verdana" size="15" />  </font>
+           GridPane.rowIndex="0" GridPane.columnIndex="0">
+        <font> <Font name="Verdana" size="15"/>  </font>
     </Label>
 
     <TextField fx:id="locationInput" GridPane.columnSpan="2"
                GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
     <Button text="Get Weather" onAction="#getWeather" fx:id="button"
-            GridPane.rowIndex="1" GridPane.columnIndex="0" />
+            GridPane.rowIndex="1" GridPane.columnIndex="0"/>
 
     <Label text="Current temperature:"
-           GridPane.rowIndex="2" GridPane.columnIndex="0" >
-        <font> <Font name="Verdana" size="15" />  </font>
+           GridPane.rowIndex="2" GridPane.columnIndex="0">
+        <font> <Font name="Verdana" size="15"/>  </font>
     </Label>
 
     <Label fx:id="currentTemp"
-           GridPane.rowIndex="2" GridPane.columnIndex="1" />
+           GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 
     <ImageView fx:id="currentIcon"
-           GridPane.rowIndex="2" GridPane.columnIndex="2" />
+           GridPane.rowIndex="2" GridPane.columnIndex="2"/>
 
     <Label text="5 Day Forecast:" GridPane.columnSpan="2"
-           GridPane.rowIndex="3" GridPane.columnIndex="0" >
-        <font> <Font name="Verdana" size="15" />  </font>
+           GridPane.rowIndex="3" GridPane.columnIndex="0">
+        <font> <Font name="Verdana" size="15"/>  </font>
     </Label>
 
     <Label fx:id="errorLabel"
-           GridPane.rowIndex="1" GridPane.columnIndex="2" />
+           GridPane.rowIndex="1" GridPane.columnIndex="2"/>
 
-    <Label fx:id="day1" GridPane.rowIndex="4" GridPane.columnIndex="1" GridPane.columnSpan="2"/>
-    <Label fx:id="day2" GridPane.rowIndex="4" GridPane.columnIndex="2" />
-    <Label fx:id="day3" GridPane.rowIndex="4" GridPane.columnIndex="3" />
-    <Label fx:id="day4" GridPane.rowIndex="4" GridPane.columnIndex="4" />
-    <Label fx:id="day5" GridPane.rowIndex="4" GridPane.columnIndex="5" />
+    <Label fx:id="day1" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+    <Label fx:id="day2" GridPane.rowIndex="4" GridPane.columnIndex="2"/>
+    <Label fx:id="day3" GridPane.rowIndex="4" GridPane.columnIndex="3"/>
+    <Label fx:id="day4" GridPane.rowIndex="4" GridPane.columnIndex="4"/>
+    <Label fx:id="day5" GridPane.rowIndex="4" GridPane.columnIndex="5"/>
 
     <fx:define>
         <ArrayList fx:id="forecastList">
@@ -67,11 +65,11 @@
         </ArrayList>
     </fx:define>
 
-    <ImageView fx:id="image1" GridPane.rowIndex="5" GridPane.columnIndex="1" GridPane.columnSpan="2"/>
-    <ImageView fx:id="image2" GridPane.rowIndex="5" GridPane.columnIndex="2" />
-    <ImageView fx:id="image3" GridPane.rowIndex="5" GridPane.columnIndex="3" />
-    <ImageView fx:id="image4" GridPane.rowIndex="5" GridPane.columnIndex="4" />
-    <ImageView fx:id="image5" GridPane.rowIndex="5" GridPane.columnIndex="5" />
+    <ImageView fx:id="image1" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+    <ImageView fx:id="image2" GridPane.rowIndex="5" GridPane.columnIndex="2"/>
+    <ImageView fx:id="image3" GridPane.rowIndex="5" GridPane.columnIndex="3"/>
+    <ImageView fx:id="image4" GridPane.rowIndex="5" GridPane.columnIndex="4"/>
+    <ImageView fx:id="image5" GridPane.rowIndex="5" GridPane.columnIndex="5"/>
 
     <fx:define>
         <ArrayList fx:id="iconList" >
@@ -83,11 +81,11 @@
         </ArrayList>
     </fx:define>
 
-    <ComboBox fx:id="degrees" GridPane.rowIndex="1" GridPane.columnIndex="1" >
+    <ComboBox fx:id="degrees" GridPane.rowIndex="1" GridPane.columnIndex="1">
         <items>
             <FXCollections fx:factory="observableArrayList">
-                <String fx:value="Celsius" />
-                <String fx:value="Fahrenheit" />
+                <String fx:value="Celsius"/>
+                <String fx:value="Fahrenheit"/>
             </FXCollections>
         </items>
     </ComboBox>
