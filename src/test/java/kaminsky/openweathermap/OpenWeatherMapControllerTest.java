@@ -1,6 +1,6 @@
 package kaminsky.openweathermap;
 
-import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.core.Single;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.SingleSelectionModel;
@@ -32,8 +32,8 @@ public class OpenWeatherMapControllerTest
     public void initialize()
     {
         // given
-        controller = new OpenWeatherMapController();
         OpenWeatherMapService service = mock(OpenWeatherMapService.class);
+        controller = new OpenWeatherMapController(service);
         controller.service = service;
         OpenWeatherMapServiceFactory factory = mock(OpenWeatherMapServiceFactory.class);
         controller.factory = factory;
@@ -53,20 +53,24 @@ public class OpenWeatherMapControllerTest
 
     }
 
+    // Test to make sure that service.getCurrentWeather()
+    // is called when getWeather() is called
     @Test
     public void getWeather()
     {
         // given
-        controller = new OpenWeatherMapController();
+        OpenWeatherMapService service = mock(OpenWeatherMapService.class);
+        controller = new OpenWeatherMapController(service);
+        doReturn(Single.never()).when(service).getCurrentWeather("Pittsburgh", "imperial");
+        doReturn(Single.never()).when(service).getWeatherForecast("Pittsburgh", "imperial");
         degrees = mock(ComboBox.class);
         controller.degrees = degrees;
         errorLabel = mock(Label.class);
         controller.errorLabel = errorLabel;
-        OpenWeatherMapService service = mock(OpenWeatherMapService.class);
         controller.service = service;
         TextField locationInput = mock(TextField.class);
         controller.locationInput = locationInput;
-        Disposable disposable = mock(Disposable.class);
+        doReturn("Pittsburgh").when(locationInput).getText();
         doReturn("Fahrenheit").when(degrees).getValue();
 
         // when
@@ -75,14 +79,15 @@ public class OpenWeatherMapControllerTest
         // then
         Assert.assertEquals("Fahrenheit", degrees.getValue());
         verify(errorLabel).setText("");
-
+        verify(service).getCurrentWeather("Pittsburgh", "imperial");
     }
 
     @Test
     public void onOpenWeatherMapFeedRun()
     {
         // given
-        controller = new OpenWeatherMapController();
+        OpenWeatherMapService service = mock(OpenWeatherMapService.class);
+        controller = new OpenWeatherMapController(service);
         degrees = mock(ComboBox.class);
         controller.degrees = degrees;
         Label currentTemp = mock(Label.class);
@@ -115,7 +120,8 @@ public class OpenWeatherMapControllerTest
     public void onOpenWeatherMapForecastRun()
     {
         // given
-        controller = new OpenWeatherMapController();
+        OpenWeatherMapService service = mock(OpenWeatherMapService.class);
+        controller = new OpenWeatherMapController(service);
         degrees = mock(ComboBox.class);
         controller.degrees = degrees;
         List<Label> forecastList = Arrays.asList(
@@ -162,7 +168,8 @@ public class OpenWeatherMapControllerTest
     public void onErrorRun()
     {
         // given
-        controller = new OpenWeatherMapController();
+        OpenWeatherMapService service = mock(OpenWeatherMapService.class);
+        controller = new OpenWeatherMapController(service);
         errorLabel = mock(Label.class);
         controller.errorLabel = errorLabel;
         Label currentTemp = mock(Label.class);

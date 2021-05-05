@@ -36,6 +36,11 @@ public class OpenWeatherMapController
     OpenWeatherMapServiceFactory factory = new OpenWeatherMapServiceFactory();
     OpenWeatherMapService service;
 
+    public OpenWeatherMapController(OpenWeatherMapService service)
+    {
+        this.service = service;
+    }
+
     /**
      * Method called when the application is first started.
      * Initializes an OpenWeatherMapService.
@@ -138,6 +143,7 @@ public class OpenWeatherMapController
 
     public void onErrorRun(Throwable throwable)
     {
+        throwable.printStackTrace();
         errorLabel.setText("Please enter a valid location");
         currentTemp.setText("");
         currentIcon.setImage(null);
